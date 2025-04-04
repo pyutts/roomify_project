@@ -1,70 +1,55 @@
-<!DOCTYPE html>
-<html lang="id">
+
+<!doctype html>
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - KaiAdmin</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-        body {
-            background: url('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/06/aa/3d/caption.jpg?w=1200&h=-1&s=1') no-repeat center center fixed;
-            background-size: cover;
-        }
-        .blur-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.2);
-        }
-        .login-container {
-            position: relative;
-            z-index: 10;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 1rem;
-            padding: 2rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .logo-container {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-        .logo-container i {
-            font-size: 3rem;
-            color: #ff6219;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modernize Free</title>
+  <link rel="shortcut icon" type="image/png" href="{{ asset('/admin/images/logos/icon.jpg') }}" />
+  <link rel="stylesheet" href="{{ asset('/admin/css/styles.min.css') }}" />
 </head>
+
 <body>
-    <div class="blur-bg"></div>
-        <div class="container d-flex justify-content-center align-items-center vh-100">
-            <div class="col-md-6 login-container">
-                <div class="logo-container">
-                    <i class="fas fa-cubes"></i>
-                    <h1 class="fw-bold">Roomify</h1>
-                </div>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <div
+      class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+      <div class="d-flex align-items-center justify-content-center w-100">
+        <div class="row justify-content-center w-100">
+          <div class="col-md-8 col-lg-6 col-xxl-3">
+            <div class="card mb-0">
+              <div class="card-body">
+                <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
+                  <img src="{{asset('/admin/images/logos/icon_full.png')}}" width="180" alt="">
+                </a>
+                <p class="text-center">Selamat datang di Login Roomify</p>
                 <form>
-                    <h5 class="fw-normal mb-3 text-center">Login ke akun kamu!</h5>
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="email">Email address</label>
-                        <input type="email" id="email" class="form-control" required />
-                    </div>
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="password">Password</label>
-                        <input type="password" id="password" class="form-control" required />
-                    </div>
-                    <div class="d-grid">
-                        <button class="btn btn-dark btn-lg" type="submit">Login</button>
-                    </div>
-                    <div class="text-center mt-3">
-                        <a class="small text-muted" href="#">Temukan password?</a>
-                        <p class="mt-2">Anda tidak memiliki akun? <a href="#" class="text-dark">Daftar here</a></p>
-                    </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-4">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1">
+                  </div>
+                  <a href="./index.html" class="btn btn-success w-100 py-8 fs-4 mb-4 rounded-2">Login</a>
+                  <div class="d-flex align-items-center justify-content-center">
+                    <p class="fs-4 mb-0 fw-bold">Belum Punya Akun?</p>
+                    <a class="text-success fw-bold ms-2" href="./authentication-register.html">Daftar</a>
+                  </div>
                 </form>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ asset('/admin/libs/jquery/dist/jquery.min.js') }}"></script>
+  <script src="{{ asset('/admin/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
+
 </html>

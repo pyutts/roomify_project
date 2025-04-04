@@ -1,6 +1,6 @@
 <div class="container-fluid container-xl position-relative d-flex align-items-center">
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
-        <h1 class="sitename text-success ">Roomify</h1>
+      <a href="index.html" class=" d-flex align-items-center me-auto">
+        <img src="{{ asset('/home/img/icon_full.png') }}"  width="120"></img>
       </a>
       <nav id="navmenu" class="navmenu">
         <ul>
@@ -12,5 +12,5 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <a class="btn-getstarted" href="index.html#about">Login</a>
+      <a class="btn-getstarted" href="/login">Login</a>
 </div>

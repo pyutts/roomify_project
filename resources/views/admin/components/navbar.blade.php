@@ -1,77 +1,36 @@
-<div class="main-header">
-          <div class="main-header-logo">
-            <!-- Logo Header -->
-            <div class="logo-header" data-background-color="dark">
-              <a href="../index.html" class="logo">
-                <img
-                  src="{{asset ('/admin')}}/img/kaiadmin/logo_light.svg"
-                  alt="navbar brand"
-                  class="navbar-brand"
-                  height="20"
-                />
-              </a>
-              <div class="nav-toggle">
-                <button class="btn btn-toggle toggle-sidebar">
-                  <i class="gg-menu-right"></i>
-                </button>
-                <button class="btn btn-toggle sidenav-toggler">
-                  <i class="gg-menu-left"></i>
-                </button>
-              </div>
-              <button class="topbar-toggler more">
-                <i class="gg-more-vertical-alt"></i>
-              </button>
+<header class="app-header">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <ul class="navbar-nav">
+      <li class="nav-item d-block d-xl-none">
+        <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+          <i class="ti ti-menu-2"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link nav-icon-hover" href="javascript:void(0)">
+          <i class="ti ti-bell-ringing"></i>
+          <div class="notification bg-success rounded-circle"></div>
+        </a>
+      </li>
+    </ul>
+    <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+      <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <img src="{{ asset('/admin/images/profile/user-1.jpg') }}" alt="" width="35" height="35" class="rounded-circle">
+          </a>
+            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                <div class="message-body text-center">
+                    <img src="{{ asset('/admin/images/profile/user-1.jpg') }}" alt="User Profile" width="50" height="50" class="rounded-circle mb-2">
+                    <p class="mb-0 fw-semibold">I Putu Agus Wiadnyana</p>
+                    <p class="text-muted small">email@example.com</p>
+                    <hr class="my-2">
+                    <button class="btn btn-outline-success w-50">Logout</button>
+                </div>
             </div>
-            <!-- End Logo Header -->
-          </div>
-
-          <!-- Navbar Header -->
-          <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
-            <div class="container-fluid">
-              <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">      
-                <li class="nav-item topbar-user dropdown hidden-caret">
-                  <a
-                    class="dropdown-toggle profile-pic"
-                    data-bs-toggle="dropdown"
-                    href="#"
-                    aria-expanded="false"
-                  >
-                    <div class="avatar-sm">
-                      <img
-                        src="{{asset ('/admin/img/profile.jpg')}}"
-                        alt="..."
-                        class="avatar-img rounded-circle"
-                      />
-                    </div>
-                    <span class="profile-username">
-                      <span class="fw-bold">Admin</span>
-                    </span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-user animated fadeIn">
-                    <div class="dropdown-user-scroll scrollbar-outer">
-                      <li>
-                        <div class="user-box">
-                          <div class="avatar-lg">
-                            <img
-                              src="{{asset ('/admin')}}/img/profile.jpg"
-                              alt="image profile"
-                              class="avatar-img rounded"
-                            />
-                          </div>
-                          <div class="u-text">
-                            <h4>Admin</h4>
-                            <p class="text-muted">Admin</p>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Logout</a>
-                      </li>
-                    </div>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </nav>
-          <!-- End Navbar -->
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
