@@ -14,17 +14,15 @@
     data-sidebar-position="fixed" data-header-position="fixed">
 
     <!-- Sidebar -->
-    @include('admin.components.sidebar')
+    @include('hotelonwers.components.sidebar')
 
     <!-- Main Content -->
     <div class="body-wrapper">
       <!-- Navbar -->
-      @include('admin.components.navbar')
+      @include('hotelonwers.components.navbar')
 
       <!-- Content -->
       <div class="container-fluid">
-        @yield('content_login')
-        @yield('content_dashboard_admin')
         @yield('content_dashboard_hotel_onwers')
       </div>
     </div>

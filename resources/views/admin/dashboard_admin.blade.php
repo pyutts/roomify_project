@@ -2,7 +2,7 @@
 
 @section('title', 'Dashboard')
 
-@section('content_dashboard')
+@section('content_dashboard_admin')
   <div class="card">
     <div class="card-body">
       <h5 class="card-title fw-semibold mb-4">Dashboard</h5>
