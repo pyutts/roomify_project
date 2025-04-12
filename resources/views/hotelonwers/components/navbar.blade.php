@@ -23,14 +23,15 @@
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                 <div class="message-body text-center">
                     <img src="{{ asset('/admin/images/profile/user-1.jpg') }}" alt="User Profile" width="50" height="50" class="rounded-circle mb-2">
-                    <p class="mb-0 fw-semibold">I Putu Agus Wiadnyana</p>
-                    <p class="text-muted small">email@example.com</p>
+                    <p class="mb-0 fw-semibold">{{ session('users_name') }}</p>
+                    <p class="text-muted small">{{ session('users_role') }}</p>
                     <hr class="my-2">
-                    <button class="btn btn-outline-success w-50">Logout</button>
+                    <button class="btn btn-outline-success w-50" id="btnLogout">Logout</button>
                 </div>
             </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
     </div>
   </nav>
 </header>
+

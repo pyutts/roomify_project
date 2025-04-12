@@ -10,6 +10,9 @@
 </head>
 
 <body>
+  <form id="logoutForm" action="{{ route('users.logout') }}" method="POST" style="display: none;">
+      @csrf
+  </form>
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
     data-sidebar-position="fixed" data-header-position="fixed">
 
@@ -33,6 +36,27 @@
   <script src="{{ asset('/admin/js/sidebarmenu.js') }}"></script>
   <script src="{{ asset('/admin/js/app.min.js') }}"></script>
   <script src="{{ asset('/admin/libs/simplebar/dist/simplebar.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    $('#btnLogout').click(function (e) {
+      e.preventDefault();
+
+      Swal.fire({
+        title: 'Apakah Anda Akan Logout?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#198754',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, logout!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $('#logoutForm').submit();
+        }
+      });
+    });
+  </script>
+
 
 </body>
 </html>

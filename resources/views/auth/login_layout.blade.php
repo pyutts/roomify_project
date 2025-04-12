@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Modernize Free</title>
+  <title>Login | Roomify</title>
   <link rel="shortcut icon" type="image/png" href="{{ asset('/admin/images/logos/icon.jpg') }}" />
   <link rel="stylesheet" href="{{ asset('/admin/css/styles.min.css') }}" />
 </head>
@@ -25,21 +25,21 @@
                   <img src="{{asset('/admin/images/logos/icon_full.png')}}" width="180" alt="">
                 </a>
                 <p class="text-center">Selamat datang di Login Roomify</p>
-                <form>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  </div>
-                  <div class="mb-4">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
-                  </div>
-                  <a href="./index.html" class="btn btn-success w-100 py-8 fs-4 mb-4 rounded-2">Login</a>
-                  <div class="d-flex align-items-center justify-content-center">
-                    <p class="fs-4 mb-0 fw-bold">Belum Punya Akun?</p>
-                    <a class="text-success fw-bold ms-2" href="./authentication-register.html">Daftar</a>
-                  </div>
-                </form>
+                  <form id="formLogin">
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-4">
+                      <label for="password" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100 py-8 fs-4 mb-4 rounded-2">Login</button>
+                    <div class="d-flex align-items-center justify-content-center">
+                      <p class="fs-4 mb-0 fw-bold">Belum Punya Akun?</p>
+                      <a class="text-success fw-bold ms-2" href="{{ route('users.register') }}">Daftar</a>
+                    </div>
+                  </form>
               </div>
             </div>
           </div>
@@ -50,6 +50,75 @@
 
   <script src="{{ asset('/admin/libs/jquery/dist/jquery.min.js') }}"></script>
   <script src="{{ asset('/admin/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+   $('#formLogin').submit(function (e) {
+    e.preventDefault();
+
+    const email = $('#email').val().trim();
+    const password = $('#password').val().trim();
+
+    if (!email || !password) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Oops!',
+        text: 'Email dan password wajib diisi.',
+      });
+      return;
+    }
+    
+    $.ajax({
+      url: "{{ route('users.login.submit') }}",
+      type: "POST",
+      data: {
+        email: email,
+        password: password,
+        _token: '{{ csrf_token() }}'
+      },
+      success: function (response) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil!',
+          text: response.message,
+          timer: 1500,
+          showConfirmButton: false
+        }).then(() => {
+          window.location.href = response.redirect;
+        });
+      },
+      error: function (xhr) {
+        let message = 'Terjadi kesalahan';
+
+        if (xhr.status === 401) {
+          message = xhr.responseJSON?.message ?? 'Email atau password salah!';
+        } else if (xhr.status === 422) {
+          const errors = xhr.responseJSON.errors;
+          const firstError = Object.values(errors)[0][0];
+          message = firstError;
+        }
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal!',
+          text: message,
+        });
+      }
+    });
+  });
+  </script>
+
+  <!-- Validasi Eror untuk Session -->
+  @if(session('error'))
+  <script>
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops!',
+          text: '{{ session('error') }}',
+          timer: 2000,
+          showConfirmButton: false
+      });
+  </script>
+  @endif
+
 </body>
 
 </html>

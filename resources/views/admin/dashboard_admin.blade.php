@@ -9,4 +9,5 @@
       <p class="mb-0">Welcome to the Dashboard</p>
     </div>
   </div>
+  
 @endsection
