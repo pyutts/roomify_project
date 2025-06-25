@@ -29,8 +29,10 @@ class LaporanController extends Controller
                 ->whereIn('status', ['confirmed', 'cancelled'])
                 ->get();
 
-            if ($bookings->isEmpty()) {
-                return redirect()->back()->with('error', 'Tidak ada data pemesanan untuk dicetak.');
+             if ($bookings->isEmpty()) {
+                return view('admin.section.laporan.laporan_kosong', [
+                    'message' => 'Tidak ada data pemesanan sama sekali untuk dicetak.'
+                ]);
             }
 
             $pdf = Pdf::loadView('admin.section.laporan.laporan_pdf_semua', ['bookings' => $bookings]);
@@ -43,7 +45,9 @@ class LaporanController extends Controller
                 ->get();
 
             if ($bookings->isEmpty()) {
-                return redirect()->back()->with('error', "Tidak ada data pemesanan untuk user '{$user->name}'.");
+                return view('admin.section.laporan.laporan_kosong', [
+                    'message' => "Tidak ada data pemesanan yang dapat dicetak untuk user '{$user->name}'."
+                ]);
             }
             
             $pdf = Pdf::loadView('admin.section.laporan.laporan_pdf_per_user', ['bookings' => $bookings, 'user' => $user]);
