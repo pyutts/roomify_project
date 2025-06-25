@@ -15,7 +15,7 @@ class LaporanController extends Controller
         return view('admin.section.laporan.laporan_list', compact('users'));
     }
 
-    public function cetak(Request $request)
+     public function cetak(Request $request)
     {
         $request->validate([
             'jenis' => 'required|in:semua,per_user',
@@ -23,16 +23,17 @@ class LaporanController extends Controller
         ]);
 
         $jenis = $request->get('jenis');
-        $data = [];
-        $viewName = '';
 
         if ($jenis == 'semua') {
             $bookings = Booking::with(['user', 'room.hotel'])
                 ->whereIn('status', ['confirmed', 'cancelled'])
                 ->get();
 
-            $viewName = 'admin.section.laporan.laporan_pdf_semua';
-            $data = ['bookings' => $bookings];
+            if ($bookings->isEmpty()) {
+                return redirect()->back()->with('error', 'Tidak ada data pemesanan untuk dicetak.');
+            }
+
+            $pdf = Pdf::loadView('admin.section.laporan.laporan_pdf_semua', ['bookings' => $bookings]);
 
         } elseif ($jenis == 'per_user') {
             $userId = $request->get('user_id');
@@ -40,16 +41,14 @@ class LaporanController extends Controller
             $bookings = Booking::with(['room.hotel'])
                 ->where('user_id', $userId)
                 ->get();
+
+            if ($bookings->isEmpty()) {
+                return redirect()->back()->with('error', "Tidak ada data pemesanan untuk user '{$user->name}'.");
+            }
             
-            $viewName = 'admin.section.laporan.laporan_pdf_per_user';
-            $data = ['bookings' => $bookings, 'user' => $user];
+            $pdf = Pdf::loadView('admin.section.laporan.laporan_pdf_per_user', ['bookings' => $bookings, 'user' => $user]);
         }
 
-        if (empty($bookings)) {
-             return redirect()->back()->with('error', 'Tidak ada data untuk dicetak.');
-        }
-
-        $pdf = Pdf::loadView($viewName, $data);
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream("laporan_{$jenis}.pdf");
     }
