@@ -13,25 +13,37 @@
         </a>
       </li>
     </ul>
-    <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
-      <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-        <li class="nav-item dropdown">
-          <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <img src="{{ asset('/admin/images/profile/user-1.jpg') }}" alt="" width="35" height="35" class="rounded-circle">
-          </a>
-            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
-                <div class="message-body text-center">
-                    <img src="{{ asset('/admin/images/profile/user-1.jpg') }}" alt="User Profile" width="50" height="50" class="rounded-circle mb-2">
-                    <p class="mb-0 fw-semibold">{{ session('users_name') }}</p>
-                    <p class="text-muted small">{{ session('users_role') }}</p>
-                    <hr class="my-2">
-                    <button class="btn btn-outline-success w-50" id="btnLogout">Logout</button>
-                </div>
-            </div>
-          </li>
-        </ul>
-    </div>
+
+     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                <li class="nav-item me-3">
+                    <a class="d-flex align-items-center border rounded p-2 shadow-sm bg-white">
+                      @php
+                          $photo = session('users_photo') ?? asset('admin/images/profile/user-1.jpg');
+                      @endphp
+
+                      @if ($photo && file_exists(public_path('storage/' . $photo)))
+                          <img src="{{ asset('storage/' . $photo) }}" alt="User" width="40" height="40" class="rounded-circle me-2">
+                      @else
+                          <img src="{{ asset('admin/images/profile/user-1.jpg') }}" alt="User" width="40" height="40" class="rounded-circle me-2">
+                      @endif  
+
+                        <div>
+                            <div class="fw-bold mb-0">{{ session('users_name') }}</div>
+                            <small class="text-muted">
+                                {{ session('users_role') == 'hotel_owner' ? 'Hotel Owner' : (session('users_role') == 'admin' ? 'Admin' : ucfirst(str_replace('_', ' ', session('users_role')))) }}
+                            </small>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                  <button type="button" id="btnLogout" class="btn btn-outline-danger d-flex align-items-center">
+                      <i class="fas fa-sign-out-alt me-1"></i> Logout
+                  </button>
+                </li>
+            </ul>
+        </div>
+
   </nav>
 </header>
 

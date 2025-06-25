@@ -16,11 +16,10 @@
         <div class="col-lg-4 col-md-6 footer-links">
           <h4>Quick Links</h4>
           <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Hotels</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('home_login') }}">Home</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('hotel.daftar') }}">Daftar Hotel</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">My Bookings</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">About</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('home_about') }}">About</a></li>
           </ul>
         </div>
 

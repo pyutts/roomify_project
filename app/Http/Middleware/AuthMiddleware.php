@@ -17,7 +17,7 @@ class AuthMiddleware
     {
         // Cek apakah user login
         if (!Session::has('users_id')) {
-            return redirect()->route('users.login')->with('error', 'Anda belum login!');
+            return redirect()->route('login')->with('error', 'Anda belum login!');
         }
 
         // Ambil role dari session
