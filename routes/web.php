@@ -9,7 +9,7 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\MyHotelController;
 use App\Http\Controllers\PaymentController;
-use App\http\Controllers\LaporanController;
+use App\Http\Controllers\LaporanController;
 use Illuminate\Support\Facades\Route;
 
 // Homepage
