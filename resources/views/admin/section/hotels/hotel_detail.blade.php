@@ -9,7 +9,6 @@
             <h4>Detail Hotel <b>{{ $hotel->name }}</b></h4>
             <div>
                 <a href="{{ route('myhotel.index') }}" class="btn btn-danger me-2">Kembali</a>
-                <button type="button" class="btn btn-primary">Visit Link</button>
             </div>
         </div>
 

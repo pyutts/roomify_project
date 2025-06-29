@@ -68,8 +68,6 @@
             <form id="formHotel" action="{{ route('myhotel.data.update', $hotel->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                
-                <input type="hidden" name="location" value="{{ old('location') }}">
 
                 <div class="row">
                     <div class="col-md-6">
@@ -269,7 +267,6 @@
         function updateLatLngInputs(latlng) {
             $('#latitude').val(latlng.lat.toFixed(6));
             $('#longitude').val(latlng.lng.toFixed(6));
-            reverseGeocode(latlng.lat, latlng.lng);
         }
 
         marker.on('dragend', function (e) {
@@ -282,37 +279,14 @@
             updateLatLngInputs(e.latlng);
         });
 
-        function reverseGeocode(lat, lng) {
-            return fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`, {
-                headers: { 'Accept': 'application/json' }
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data && data.display_name) {
-                    $('input[name="location"]').val(data.display_name);
-                } else {
-                    $('input[name="location"]').val('');
-                }
-            })
-            .catch(() => {
-                $('input[name="location"]').val('');
-            });
-        }
 
-        $('#formHotel').on('submit', function (e) {
-            e.preventDefault();
-
+         $('#formHotel').on('submit', function (e) {
+            const form = this;
             $('#descriptionInput').val(quill.root.innerHTML);
             const lat = $('#latitude').val(), lng = $('#longitude').val();
-            reverseGeocode(lat, lng).then(() => {
-                const location = $('input[name="location"]').val();
-                if (!location) {
-                    alert('Lokasi belum berhasil diambil dari peta. Silakan pilih ulang lokasi.');
-                    return;
-                }
-                this.submit();
-            });
+            form.submit();
         });
+
     });
 </script>
 @endpush

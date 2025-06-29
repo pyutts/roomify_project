@@ -68,9 +68,10 @@ class MyHotelController extends Controller
         return view('admin.section.hotels.hotel_edit', compact('hotelOwners', 'hotel'));
     }
 
-   public function update(Request $request, Hotel $hotel)
+   public function update(Request $request, $id)
     {
-        
+        $hotel = Hotel::findOrFail($id);
+
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'name' => 'required|string|max:255',
@@ -82,21 +83,26 @@ class MyHotelController extends Controller
             'address' => 'required|string|max:255',
         ]);
 
-
         $data = $request->only(['name', 'address', 'description', 'latitude', 'longitude', 'rating']);
         $data['owner_id'] = $request->input('user_id');
 
         $hotel->update($data);
 
-          if ($request->hasFile('photos')) {
-                foreach ($request->file('photos') as $photo) {
-                    $path = $photo->store('hotel_photos', 'public');
-                    HotelPhoto::create([
-                        'hotel_id' => $hotel->id,
-                        'photo' => $path,
-                    ]);
-                }
+        if ($request->hasFile('photos')) {
+            foreach ($hotel->photos as $existingPhoto) {
+                Storage::delete('public/' . $existingPhoto->photo);
+                $existingPhoto->delete();
             }
+
+            foreach ($request->file('photos') as $photo) {
+                $path = $photo->store('hotel_photos', 'public');
+                HotelPhoto::create([
+                    'hotel_id' => $hotel->id,
+                    'photo' => $path,
+                ]);
+            }
+        }
+
 
         return redirect()->route('myhotel.index')->with('success', 'Hotel berhasil diupdate.');
     }
