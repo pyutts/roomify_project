@@ -40,11 +40,6 @@ git clone https://github.com/username/roomify_project.git
 cd sipandu_pbl
 ```
 
-## 📄 Lisensi
-
-MIT License. Silakan gunakan untuk tujuan pendidikan atau pengembangan lanjutan.
-
----
 
 ## 👥 Tim Pengembang
 
